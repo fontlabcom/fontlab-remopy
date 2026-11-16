@@ -1,0 +1,47 @@
+# this_file: pyproject.toml
+[build-system]
+requires = ["hatchling>=1.27", "hatch-vcs>=0.4"]
+build-backend = "hatchling.build"
+[project]
+name = "fontlab-remopy"
+dynamic = ["version"]
+description = "Reusable FontLab launch, script and authenticated MCP remote control"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+keywords = ["fontlab", "mcp", "remote-control", "font-editor"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Operating System :: MacOS",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Multimedia :: Graphics",
+  "Typing :: Typed",
+]
+dependencies = ["mcp>=1.26,<3", "anyio>=4.12,<5"]
+[project.urls]
+Repository = "https://github.com/fontlabcom/fontlab-remopy"
+[project.optional-dependencies]
+test = ["pytest>=8", "pytest-asyncio>=0.24"]
+[project.scripts]
+fontlab-remopy = "fontlab_remopy.cli:main"
+[tool.hatch.version]
+source = "vcs"
+[tool.hatch.version.raw-options]
+fallback_version = "0.1.0"
+[tool.hatch.build.targets.wheel]
+packages = ["src/fontlab_remopy"]
+[tool.hatch.build.targets.sdist]
+only-include = ["install.vfpy", "src", "tests", "examples", "glyphs", "pyproject.toml", "README.md", "LICENSE", "NOTICE", "MIGRATION.json", "CHANGELOG.md", "DEPENDENCIES.md", "test.sh"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+[tool.fontlab-install]
+# install.vfpy: reverse-domain id; FontLab keeps Extensions/<id>/install.log.
+id = "com.fontlab.remopy"

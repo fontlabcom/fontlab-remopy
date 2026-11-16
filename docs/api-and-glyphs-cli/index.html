@@ -1,0 +1,743 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Remote FontLab sessions, tools and Glyphs scripting.">
+      
+      
+      
+        <link rel="canonical" href="https://fontlabcom.github.io/fontlab-remopy/api-and-glyphs-cli/">
+      
+      
+        <link rel="prev" href="../installation/">
+      
+      
+        <link rel="next" href="../development-and-safety/">
+      
+      
+        
+      
+      
+      
+      
+        
+        
+        
+          <link rel="icon" href="../assets/images/favicon.png">
+        
+      
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-materialx-10.1.8">
+    
+    
+      
+        <title>API and Glyphs CLI - Remopy for FontLab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.314bbef5.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.a45159b5.min.css">
+      
+    
+    
+
+    
+
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/local.css">
+    
+      <link rel="stylesheet" href="https://i.fontlab.com/fltheme26/1.0.0/components.css">
+    
+      <link rel="stylesheet" href="https://i.fontlab.com/fltheme26/1.0.0/theme.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  <script src="https://i.fontlab.com/menu/fontlab.js" defer></script>
+
+  </head>
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" data-mx-topbar="glass">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="toc" type="checkbox" id="__toc" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <label class="md-overlay" for="__toc"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-sessions-and-command-line" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+  <fontlab-menu mode="light" site-label="Remopy for FontLab"
+                site-url="https://fontlabcom.github.io/fontlab-remopy/"
+                mobile-menu="materialx" mobile-search="materialx"></fontlab-menu>
+  
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Remopy for FontLab" class="md-header__button md-logo" aria-label="Remopy for FontLab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Remopy for FontLab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API and Glyphs CLI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2M3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10.25 2a8.25 8.25 0 0 1 6.34 13.53l5.69 5.69a.749.749 0 0 1-.326 1.275.75.75 0 0 1-.734-.215l-5.69-5.69A8.25 8.25 0 1 1 10.25 2M3.5 10.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/fontlabcom/fontlab-remopy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fontlabcom/fontlab-remopy
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Remopy for FontLab" class="md-nav__button md-logo" aria-label="Remopy for FontLab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Remopy for FontLab
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/fontlabcom/fontlab-remopy" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    fontlabcom/fontlab-remopy
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API and Glyphs CLI
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API and Glyphs CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc">
+      
+        <li class="md-nav__item">
+  <a href="#remote-control-fontlab-from-glyphs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remote-control FontLab from Glyphs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development-and-safety/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development and safety
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Licence
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc">
+      
+        <li class="md-nav__item">
+  <a href="#remote-control-fontlab-from-glyphs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Remote-control FontLab from Glyphs
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+  
+
+
+<h1 id="api-sessions-and-command-line">API, sessions and command line</h1>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FontLab(command=None, timeout=30)</code></td>
+<td>Synchronous client; use as <code>with FontLab() as fl:</code>. <code>command</code> is the bridge executable, <code>timeout</code> seconds per call</td>
+</tr>
+<tr>
+<td><code>AsyncFontLab(command=None, timeout=30)</code></td>
+<td>Same operations as <code>async with</code> and <code>await</code></td>
+</tr>
+<tr>
+<td><code>fl.run(code, **vars)</code></td>
+<td>Run Python in FontLab; returns <code>ExecutionResult(value, stdout, stderr)</code>; set <code>result</code> to return a value</td>
+</tr>
+<tr>
+<td><code>fl.eval(expression, **vars)</code></td>
+<td>Evaluate one expression; returns the JSON value</td>
+</tr>
+<tr>
+<td><code>fl.execute_script(path, **vars)</code></td>
+<td>Run a <code>.flpy</code>/<code>.vfpy</code> file, <code>__file__</code> set to its resolved path</td>
+</tr>
+<tr>
+<td><code>fl.tool(name, **arguments)</code> / <code>fl.tools()</code></td>
+<td>Call any native tool by name / list the live catalogue with schemas. Unknown argument names raise <code>ValueError</code> (FontLab would drop them silently); the master argument is <code>master_name</code></td>
+</tr>
+<tr>
+<td><code>fl.fonts()</code>, <code>fl.output()</code>, named controls</td>
+<td>Open fonts; recent captured output; the catalogue tools listed below</td>
+</tr>
+<tr>
+<td><code>@fl.python</code></td>
+<td>Run a decorated function remotely with JSON arguments and result</td>
+</tr>
+<tr>
+<td><code>enable_mcp()</code></td>
+<td>Inside FontLab: set <code>mcp.enabled</code> and notify the host (no <code>save()</code>)</td>
+</tr>
+<tr>
+<td><code>setup_mcp()</code>, <code>launch()</code>, <code>submit_script()</code>, <code>find_bridge()</code></td>
+<td>Launch FontLab, enable MCP from outside, locate the bridge</td>
+</tr>
+<tr>
+<td><code>call_tool()</code>, <code>run_python()</code>, <code>execute_script()</code>, <code>probe_tools()</code></td>
+<td>One-shot async functions for single calls</td>
+</tr>
+</tbody>
+</table>
+<p>Errors: <code>NativeExecutionError</code> (a tool or the remote Python failed; <code>.payload</code> has type,
+message, traceback and partial output), <code>ResultTransportError</code> (the result could not be
+recovered; the call may have run), <code>ValueError</code> (bad <code>timeout</code>, variable name or oversized
+code), <code>FileNotFoundError</code> (no bridge executable), <code>RuntimeError</code> (used outside a context, or
+after a timeout until you open a fresh one), and <code>TimeoutError</code> (the call exceeded <code>timeout</code>;
+the outcome is unknown, so check FontLab before repeating).</p>
+<p>Two different time limits apply. <code>timeout</code> is how long this client waits for one MCP call.
+FontLab's <code>run_python</code> tool also enforces its own fixed five-second execution deadline,
+which Remopy cannot change: code passed to <code>run</code>, <code>eval</code> or a <code>@fl.python</code> function must
+finish within it, so split longer work into short calls and read the resulting state.
+Remote code is limited to 32768 bytes and its output to 65536 bytes.</p>
+<p>One context reuses one authenticated MCP connection. Idle time has no deadline;
+each initialization/call has the configured <code>timeout</code> (30 seconds by default).
+This synchronous API also works in notebooks with an existing event loop. It
+owns a dedicated AnyIO portal thread and releases its bridge on context exit or
+<code>close()</code>. <code>AsyncFontLab</code> exposes the same operations with <code>async with</code> and
+<code>await</code>; enter and exit that context on the same task. Calls are serialized.
+After timeout/cancellation, queued/new calls fail until a fresh context opens.
+The original one-shot async functions (<code>call_tool</code>, <code>run_python</code>,
+<code>execute_script</code>, <code>probe_tools</code>) retain their existing result shapes.</p>
+<p><code>run</code> returns <code>ExecutionResult(value, stdout, stderr)</code>; set <code>result</code> in ordinary
+Python to return a value. <code>eval</code> returns the value directly. Context methods
+<code>execute_script(path, **variables)</code> preserve the resolved filename. JSON data is
+bound into an isolated namespace; <code>fontlab</code>, <code>fontgate</code>, <code>fontpr</code>, and <code>PythonQt</code>
+are prebound when available. Explicit variables take precedence. Imports/names
+from FontLab's global script scope are not inherited or changed. Python streams
+are captured during execution; concurrent Python threads share those interpreter
+streams. Native Output is never cleared.
+Unicode text, including U+0085, U+2028 and U+2029, round-trips unchanged in
+values, captured streams and native exception messages; only LF frames envelopes.</p>
+<p><code>@fl.python</code> preserves the local function signature and metadata, binds defaults
+locally, and transports arguments/results as JSON. Put imports inside the body.
+Globals/closures, async function bodies, unavailable source, native object
+results, and non-JSON values fail clearly; notebook source limitations can use
+<code>run</code>/<code>eval</code>. Native exceptions retain type/message/traceback and partial output
+in <code>NativeExecutionError.payload</code>. Truncated/missing/unsupported JSON results
+raise <code>ResultTransportError</code>. The wrapper counts toward native 32768-byte code
+and 65536-byte output bounds; FontLab's fixed five-second execution deadline is
+unchanged. A timeout leaves execution outcome unknown and never triggers retry.</p>
+<p>Named controls include <code>fonts</code>, <code>current_font</code>, <code>current_glyphs</code>, <code>glyph("A")</code>,
+<code>font_info</code>, <code>font_metrics</code>, <code>glyph_metrics</code>, <code>list_actions</code>, <code>run_actions</code>,
+<code>output</code>, font open/new/save/close/activation and metric setters. Mutating calls
+perform the requested native operation. <code>tool(name, **arguments)</code> accesses the
+whole live catalogue; <code>tools()</code> gives its current schemas. <code>output()</code> reads MCP's
+recent capture; <code>eval("fontlab.GetProperty('output')")</code> reads the full native
+Output. The checkout provides <code>examples/control.py</code> for ordinary Python and <code>examples/native_smoke.py</code> for a read-only one-shot async check; their source is not rendered here.
+App's native UI example
+creates a native panel, modeless dialog and removable
+Preview drawing from <code>@fl.python</code> functions; <code>--typerig</code> composes a real TypeRig
+widget. Install Fontlabapp (and optionally typerig) in the host first. The example
+retains its native handles across calls, waits outside the UI thread, and removes
+only its own resources in <code>finally</code>.</p>
+<p><code>execute_script()</code> reads .flpy/.vfpy source, preserves its resolved filename as
+<strong>file</strong>, and verifies the native run_python success payload. Native errors raise
+NativeExecutionError with the original payload. <code>call_tool()</code> returns the actual
+SDK result, including real errors. FontLab's fixed execution deadline remains
+unchanged. Timeouts leave a mutation's outcome unknown; operations are never
+automatically retried.</p>
+<p><code>launch()</code> requests application launch. <code>submit_script()</code> uses file association
+and returns execution_verified=False: submission alone cannot prove execution.
+The library's launch/file-association implementation currently supports macOS;
+MCP can use an explicitly configured executable on other supported SDK platforms.</p>
+<p><code>setup_mcp()</code> submits one unique .vfpy macro, verifies a nonce-matched native
+completion marker, then authenticates the bridge and discovers the tool catalogue.
+Only the extended mcp.enabled preference is set, using load() and a host
+notification. Failed/timeout setup retains local macro/status files for inspection.
+<code>enable_mcp()</code> performs the same preference update when called inside FontLab.
+It does not call save() or clear application logs.</p>
+<p>Discovery checks an explicit argument or FONTLAB_MCP_COMMAND, then the native
+bridge on PATH or the FontLab 9 bundle. The legacy AIDUS_FONTLAB_MCP_COMMAND
+variable remains accepted for migration. Paths containing spaces are preserved.
+An explicit missing executable never falls back to a different FontLab build.</p>
+<div class="highlight"><pre><span></span><code>fontlab-remopy<span class="w"> </span>launch
+fontlab-remopy<span class="w"> </span>--timeout<span class="w"> </span><span class="m">15</span><span class="w"> </span>setup
+fontlab-remopy<span class="w"> </span>tools
+fontlab-remopy<span class="w"> </span>execute<span class="w"> </span>example.flpy
+fontlab-remopy<span class="w"> </span>call<span class="w"> </span>list_fonts
+</code></pre></div>
+<h2 id="remote-control-fontlab-from-glyphs">Remote-control FontLab from Glyphs</h2>
+<p><code>glyphs/fontlab_remote.py</code> runs inside Glyphs 3 or 4 (or any Python 3.8+) with the
+standard library only, so Glyphs' Python needs nothing installed. It starts FontLab's
+bundled <code>fontlab-mcp</code> bridge (which holds the authentication for FontLab's local
+server) and speaks MCP over its standard input/output, with a deadline on every read.</p>
+<p>Install: copy the file into Glyphs' Scripts folder (Script &gt; Open Scripts Folder,
+i.e. <code>~/Library/Application Support/Glyphs 3/Scripts/</code>), then Script &gt; Reload Scripts.
+FontLab must be running with external MCP clients enabled (Preferences &gt; Aidus).
+Run <strong>Script &gt; FontLab Remote Control</strong> to print FontLab's version and open fonts
+next to Glyphs' current font in the Macro panel. From your own Glyphs scripts:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">fontlab_remote</span><span class="w"> </span><span class="kn">import</span> <span class="n">FontLabClient</span>
+
+<span class="k">with</span> <span class="n">FontLabClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">fl</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">([</span><span class="n">t</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">fl</span><span class="o">.</span><span class="n">tools</span><span class="p">()])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fl</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">"list_fonts"</span><span class="p">))</span>                  <span class="c1"># any FontLab MCP tool</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fl</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="s2">"2 + 40"</span><span class="p">))</span>                      <span class="c1"># a JSON value from FontLab Python</span>
+    <span class="n">fl</span><span class="o">.</span><span class="n">run_python</span><span class="p">(</span><span class="s2">"print(fontlab.CurrentFont())"</span><span class="p">)</span>  <span class="c1"># output text</span>
+</code></pre></div>
+<p>Tool errors, bridge exits (with the bridge's message) and missed deadlines raise
+<code>FontLabError</code>. <code>FONTLAB_MCP_COMMAND</code> selects another bridge. Glyphs' Python must be
+configured (Glyphs &gt; Settings &gt; Addons); a framework that no longer exists makes every
+Glyphs script fail before this one starts.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+          <div class="md-top" data-md-component="top" hidden>
+  <div class="md-top__center">
+    <button type="button" class="md-top__button md-top__button--main" data-md-action="top">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+      <span>Back to top</span>
+    </button>
+    
+      
+      
+      <label class="md-top__button md-top__side md-top__side--nav" for="__drawer" >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-panel-left" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+      </label>
+    
+    
+      
+      
+      <label class="md-top__button md-top__side md-top__side--toc" for="__toc" >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-panel-right" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/></svg>
+      </label>
+    
+  </div>
+</div>
+      </main>
+      
+  
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://jaywhj.github.io/mkdocs-materialx/" target="_blank" rel="noopener">
+      MaterialX
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+  <fontlab-footer mode="light"></fontlab-footer>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "code": null, "features": ["search.highlight", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "code.collapse": "Collapse", "code.download": "Download", "code.expand": "Expand remaining # lines", "code.select": "Toggle line selection", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.fc193f93.min.js"></script>
+      
+        <script src="https://i.fontlab.com/fltheme26/1.0.0/basecoat.js"></script>
+      
+        <script src="https://i.fontlab.com/fltheme26/1.0.0/theme.js"></script>
+      
+    
+  </body>
+</html>

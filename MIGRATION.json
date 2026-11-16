@@ -1,0 +1,36 @@
+{
+  "source_repository": "fontlabcom/fontlab-aidus-priv",
+  "files": [
+    {
+      "source": "aidus_code_core/mcp_bridge.py",
+      "sha256": "1b48f430cece5477d67ad4358dca7c128f907a9f28514116f9846c894e0b07bc",
+      "destination": "src/fontlab_remopy/mcp/relay.py",
+      "compatibility_entry_point": "fontlab_remopy.mcp_bridge"
+    },
+    {
+      "source": "aidus_code_core/fontlab_mcp.py",
+      "sha256": "dc809f27b1c5d59d270d9ffe6e8165624a6b55d80a9ed37b3a23cca35d5e4ea0"
+    },
+    {
+      "source": "scripts/run_in_fontlab.sh",
+      "sha256": "52c325e8e281cc80bf452a7b2283444f43a2a9bfe1f320c41a4112f480138f4f"
+    },
+    {
+      "source": "scripts/enable_fontlab_mcp.vfpy",
+      "sha256": "cc1eef30ff65032ce7dcdc40fc138fbdac31329008e3c8385efa84497d5dce41"
+    }
+  ],
+  "source_preserved": false,
+  "source_revision": "7f157517ed8ee962328f0ff279b42416263368a5",
+  "legacy_archive_sha256": "4d70e9c5dd6b3c477a89a9e439558d6b20362abbb2e2a01236a76ae5c211d3e3",
+  "source_cleanup": {
+    "status": "verified moved; verbatim originals retained in destination recovery",
+    "source_commits": {
+      "aidus-code": "63773030c1b82fda2f7cc6774b68c042359bb3c7",
+      "fontlabpy": "50933ff0f6329521caa300ba7c6c84c566a731bf",
+      "fontlab-python-docs": "4ff36702f0db26e3db0e0d672bce8ac29d685010"
+    },
+    "complete_shadow_archive_sha256": "0dc04c9677043f1345be97e9d2f9998b4988f60c25df2905343b60221d76e7a4",
+    "excluded_recovery_from_distributions": true
+  }
+}

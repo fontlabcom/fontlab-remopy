@@ -1,0 +1,47 @@
+---
+this_file: PLAN.md
+---
+
+## Shared installer: remaining delivery qualification — 2026-11-15
+
+Reconcile the source-reviewed, three-SDK-qualified shared-installer candidate against fresh main, obtain independent merge review, run normal hook/combined-source gates, verify main delivery and exact-SHA CI, then qualify the tag/release/archive/download inputs. Preserve the existing package-specific dependency and distribution contracts. Then qualify the coherent provider/consumer and Script/Extension cohort through the admitted root installer and native lane; source checks do not establish those outcomes. Keep every existing ownership, native, publication and paused-work limit.
+
+
+
+# Forward plan
+
+## Remaining archive and native qualification
+
+Remopy 2.0.2 source/legal metadata, ordinary release/downloads and bounded
+installed-wheel checks are qualified in CHANGELOG. Resolve the original archive
+contract separately; historical recovery is absent from this checkout and is
+not relicensed. Preserve the historical 149-file raw-mode FAIL, frozen
+MIGRATION.json hashes, third-party terms and the private Pages hold. Complete
+actual root-installer/FontLab/native acceptance under the existing admission rules.
+
+Issue 230 reconciliation is current. Issue 123 implementation remains paused; its acceptance backlog below is preserved, not resumed. Keep qualified Issue 207 candidates distinct from canonical source, ordinary installed artifacts, native acceptance and publication. Issue 210 defines the future plugin split; Issue 211 retains follow-up checks. The owner corrected the preparation catalogue reference to Issue 214.
+
+## SDK and source tuple
+
+Preserve the qualified three-SDK checks (locked2.x,1.30.0,1.26.0); rerun affected checks when source or supported providers change. The old issue122 worktree-only instruction is historical, not a requirement to recreate that checkout. Preserve supported SDK/host compatibility while reconciling Issue207 caller/distribution cleanup.
+
+## Installed native acceptance
+
+After owner access restoration, audit the actual process/build/documents/dirty state and fences before native qualification. Recheck installed-artifact setup, catalogue, nonce-verified `.flpy` execution and launch on the current FontLab build. Use owned fixtures through the workspace native runner. Offline transports/fixture servers do not prove a native host; timeout is not cancellation.
+
+Requalify [App's examples/native_ui.py](https://github.com/fontlabcom/fontlab-fontlabapp/blob/main/examples/native_ui.py) against the actual current App/Remopy refactor, including TypeRig composition, ownership, cleanup and complete-font preservation. Do not recreate the removed duplicate in Remopy. Keep artifact/origin, native, promotion and publication gates separate.
+
+## Development checks
+
+Run `uv sync --extra test`, `./test.sh`, `uv run --extra test --with "mcp==1.30.0" python -m pytest -q`, and `uv run --extra test --with "mcp==1.26.0" python -m pytest -q`. All three lines are required for the advertised SDK range.
+
+## Review, integration and cleanup
+
+Use the detailed open tasks in [TODO.md](TODO.md) as the acceptance checklist. Complete one scoped MVP, then run the exact repository checks and unchanged 80% gate for each complete changed production module. Keep source, genuine artifacts, ordinary origins and native behavior separate. Obtain independent review before a milestone commit/push and verify the actual remote head. Reconcile concurrent source and all callers before main integration. Preserve recovery/unique work and fresh owner/worktree attachments before obsolete branch/file cleanup. Update TODO/PLAN and record only scoped verified results in CHANGELOG. Do not drive the owner's FontLab, install into its user folder or publish a site from this proposal.
+
+## Documentation delivery gates
+
+Obtain independent review of the complete source and generated site, preserve
+current source bytes, then qualify exact-SHA main Actions through the ordinary
+reviewed delivery process. Exercise changed-output bot-child and code-only live
+triggers separately. Private Pages publication remains owner-held.

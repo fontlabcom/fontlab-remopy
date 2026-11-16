@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://fontlabcom.github.io/fontlab-remopy/</loc>
+        <lastmod>2026-11-15</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>https://fontlabcom.github.io/fontlab-remopy/api-and-glyphs-cli/</loc>
+        <lastmod>2026-11-15</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>https://fontlabcom.github.io/fontlab-remopy/development-and-safety/</loc>
+        <lastmod>2026-11-15</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>https://fontlabcom.github.io/fontlab-remopy/installation/</loc>
+        <lastmod>2026-11-15</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+    <url>
+        <loc>https://fontlabcom.github.io/fontlab-remopy/licence/</loc>
+        <lastmod>2026-11-15</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+</urlset>
