@@ -5,6 +5,13 @@ this_file: WORK.md
 ## 2026-11-15 — Shared installer source alignment
 
 Copied the reviewed shared installer exactly: dependency constraints and managed origins remain protected; inactive conditional dependencies are filtered before sibling execution in the resolver target Python. FontLab imports remain standard-library-only. Package identity, runtime APIs, dependency declarations, scripts, bundles and legal files are unchanged. The real source-archive check now includes the exact root installer; the prior omission was reproduced before the single allowlist addition.
+## 2026-11-14 — Functional work order documented
+
+Updated AGENTS, PLAN and TODO to prioritize useful functional changes and compatible package boundaries, with detailed testing deferred. Existing backlog and prior records are retained. Documentation preservation and policy consistency were checked; no runtime, installed or native checks ran in this documentation-only pass.
+
+Next: reconcile launch/catalogue/command changes with App and Aidus consumers and supported MCP SDK paths using focused checks before the detailed installed-host pass; never replay an unknown mutation.
+
+Nothing is in progress. Remopy 2.0.0 is on `main` (eight deprecated modules removed). Completed work is in CHANGELOG.md; open work is in TODO.md and PLAN.md.
 
 Fresh isolated successor: the eight reviewed source postimages were hash-verified before transfer; the approved AGENTS priority amendment is separate. Independent source review passed. Focused archive/layout checks pass on Python 3.11 arm64 (9 passed). Controller full-suite checks passed on locked SDK, MCP 1.30.0 and MCP 1.26.0: each 179 passed with one existing missing-App-sibling skip, in 21.66/26.07/26.61 seconds pytest time (22.05/26.78/27.03 seconds command elapsed). The lock remains byte-exact. The older attempt remains held; historical graph scope and control-state uncertainty remain open. Normal hooks, fresh-main merge and independent merge review, main delivery/CI, tag/release/downloads, installed provider closure and admitted FontLab/native/full-cohort workflows remain pending. No owner-folder installation or native operation ran.
 

@@ -86,6 +86,10 @@ Independent postpublication REMOPY-RELEASE-REVIEW.md approves these bounded sour
   release, owner installation, native acceptance and licence migration remain
   open. This entry records isolated verification only.
 
+## 2026-11-14 — Functional work order documented
+
+- Added the owner's functional-progress-first guidance and repository-specific priorities, including cross-package compatibility and a later detailed testing pass. Existing mandatory hooks, holds and unfinished work remain in force.
+- This change updates guidance and planning only; it establishes no new runtime, installed, native or release result.
 
 ## 2026-11-12 — D46 documentation pass (Issue 250)
 

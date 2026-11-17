@@ -11,6 +11,8 @@ this_file: TODO.md
 
 # Open tasks
 
+- [ ] Reconcile launch/catalogue/command changes with App and Aidus consumers and supported MCP SDK paths using focused checks before the detailed installed-host pass; never replay an unknown mutation.
+
 - [ ] Remove the deprecated `fontlab_remopy.mcp_bridge` entry point in the major release after 2.0 (owner Q6=A: it stays one major longer because saved MCP configs may run it). Replace `tests/test_mcp_bridge_deprecation.py` with a `ModuleNotFoundError` test, update `MIGRATION.json` and README, and have python-docs regenerate its pages.
 - [ ] Requalify installed launch/catalogue/nonce execution on the supported host and the App-owned native UI consumer; timeouts do not cancel host code.
 - [ ] Run the exact repository checks on the integrated source, obtain independent review, commit/push the scoped milestone and verify its remote head.

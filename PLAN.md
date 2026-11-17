@@ -18,6 +18,11 @@ contract separately; historical recovery is absent from this checkout and is
 not relicensed. Preserve the historical 149-file raw-mode FAIL, frozen
 MIGRATION.json hashes, third-party terms and the private Pages hold. Complete
 actual root-installer/FontLab/native acceptance under the existing admission rules.
+## Functional work order — 2026-11-14
+
+Prioritize reliable supported-host launch, catalogue and command execution with the current App and Aidus consumers. Keep advertised MCP SDK compatibility and the retained deprecated entry point intact; preserve serialized calls and unknown mutation outcomes after timeouts.
+
+Use small smoke checks and focused regressions for changed behavior and package boundaries. Keep the existing detailed acceptance tasks for a later testing pass; mandatory delivery hooks and current holds remain in force.
 
 Issue 230 reconciliation is current. Issue 123 implementation remains paused; its acceptance backlog below is preserved, not resumed. Keep qualified Issue 207 candidates distinct from canonical source, ordinary installed artifacts, native acceptance and publication. Issue 210 defines the future plugin split; Issue 211 retains follow-up checks. The owner corrected the preparation catalogue reference to Issue 214.
 
