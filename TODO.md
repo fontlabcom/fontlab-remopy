@@ -2,6 +2,13 @@
 this_file: TODO.md
 ---
 
+## Guarded common installer
+
+- [ ] Obtain independent final review, current graph qualification and fresh-main reconciliation of the canonical 1.0.11 template and preserved metadata/archive/licence contracts.
+- [ ] Qualify the ordinary push hook, exact-commit CI and genuine release/archive/download inputs on the final source; repeat the three-SDK checks if its source or dependency tuple changes.
+- [ ] After admission, qualify the full installed provider/consumer cohort, owner recovery and native/Windows receipts; retain Aidus/Fly, unknown Windows replay and private Pages holds.
+
+
 ## Issue 256 Windows submission — 2026-11-17
 
 - [ ] Obtain independent review and fresh-main delivery qualification for the CrossOver/Wine launch and submit candidate.

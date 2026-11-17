@@ -2,6 +2,18 @@
 this_file: PLAN.md
 ---
 
+## Guarded common installer: remaining qualification
+
+Obtain independent final review of the canonical 1.0.11 template and static
+oracle, verify the current graph and reconcile with actual upstream main.
+Qualify the ordinary push hook, exact-commit CI and release/archive/download
+inputs on that final source. Repeat the required three-SDK checks if the source
+or dependency tuple changes. Source suites and local fixture servers do not
+qualify consumer installation, owner recovery or native/Windows receipts.
+Keep the full provider/consumer cohort, Aidus/Fly adoption, unknown Windows replay
+and private Pages gates open under their existing admission rules.
+
+
 ## Issue 256 Windows submission: remaining qualification — 2026-11-17
 
 Independently review the explicit CrossOver/Wine launch and submission candidate,

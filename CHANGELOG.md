@@ -2,6 +2,33 @@
 this_file: CHANGELOG.md
 ---
 
+## 2026-11-17 — Guarded common installer source qualification
+
+The installer validates the requested FontLab data context before reusing an
+installed provider. Reuse requires the migration, message and failed-upgrade
+rollback entry points; a provider missing these capabilities must be refreshed.
+The copied bootstrap is the exact canonical Instamix 1.0.11 template. Legacy
+rollback requires 1.0.9 or newer; context guarding originated in 1.0.10, and
+shared-layout venv reuse requires 1.0.11. Package metadata, dependency floors,
+runtime code, scripts, bundles and licences are unchanged.
+
+In a fresh full checkout, the complete source suite passed on project-resolved
+MCP 2.3.0, MCP 1.30.0 and MCP 1.26.0: 235 tests each, no skips, one retained
+deprecation warning each, in 28.28, 25.07 and 24.80 seconds. These runs use local
+SDK fixture servers and mocked host submissions. App's sibling UI example is
+AST-read only; the common installer template is read as plaintext. No installer,
+App, Fly or Instamix provider was executed. A separate unchanged normal-hook run
+on the same runtime, installer and test bytes passed 235 tests in 28.69 seconds,
+with no skips and the same warning. It found zero changed production modules;
+that result makes no changed-module coverage claim.
+
+Independent final review, current graph qualification, actual main integration,
+exact-commit CI and release inputs remain separate gates. Documentation checks,
+installed provider/consumer coherence, owner recovery and native/Windows receipt
+acceptance are separate from these source tests. Existing consumer-execution,
+Aidus/Fly, unknown Windows replay, private Pages and paused-work holds remain.
+
+
 ## 2026-11-17 — Issue 256 Windows submission source checks
 
 - Add explicit CrossOver/Wine launch and script submission providers and CLI
