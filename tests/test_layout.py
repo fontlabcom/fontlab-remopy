@@ -60,6 +60,39 @@ def test_mcp_when_nested_then_sdk_is_distinct_and_relay_shim_reexports():
     ], "Internal calls must use the canonical relay entry point"
 
 
+@pytest.mark.parametrize("executable", [
+    r"C:\\Program Files\\Fontlab\\FontLab 9\\FontLab 9.exe",
+    "/Applications/FontLab 9.app/Contents/MacOS/FontLab 9",
+])
+def test_bridge_parameters_when_inside_fontlab_then_refuses_to_launch_the_app(
+    executable, monkeypatch
+):
+    from pathlib import PurePosixPath, PureWindowsPath
+
+    from fontlab_remopy import mcp as transport
+
+    flavour = PureWindowsPath if executable.endswith(".exe") else PurePosixPath
+    monkeypatch.setattr(transport, "Path", flavour)
+    monkeypatch.setattr(sys, "executable", executable)
+    with pytest.raises(RuntimeError, match="not inside FontLab"):
+        transport.bridge_parameters("bridge")
+
+
+@pytest.mark.parametrize("executable", ["", None])
+def test_bridge_parameters_when_python_is_unknown_then_error_says_so(executable, monkeypatch):
+    from fontlab_remopy import mcp as transport
+
+    monkeypatch.setattr(sys, "executable", executable)
+    with pytest.raises(RuntimeError, match="no Python executable"):
+        transport.bridge_parameters("bridge")
+
+
+def test_bridge_parameters_when_external_python_then_uses_it():
+    from fontlab_remopy import mcp as transport
+
+    assert transport.bridge_parameters("bridge").command == sys.executable
+
+
 @pytest.mark.parametrize("module", ["mcp.relay", "mcp_bridge"])
 def test_relay_when_no_arguments_then_preserves_index_error(module):
     result = subprocess.run(

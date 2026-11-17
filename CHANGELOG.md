@@ -2,6 +2,16 @@
 this_file: CHANGELOG.md
 ---
 
+## 2026-11-17 — Relay refuses FontLab as its Python; installer stub 1.0.15 (Issue 259 follow-ups)
+
+- `fontlab_remopy.mcp` refuses to start its relay when `sys.executable` is FontLab
+  itself, with a message saying to run it from a separate Python. Starting FontLab's
+  executable as a Python hangs the host (fl#8659).
+- `install.vfpy` is now the stub from fontlab-python-instamix 1.0.15. It replaces an
+  installed instamix older than 1.0.13 and puts the old copy back if the upgrade
+  fails; linked checkouts and local builds are kept. A download that fails for
+  lack of root certificates (FontLab 9 for macOS) is retried with the system curl.
+
 ## 2026-11-17 — Issue 258 task cleanup
 
 - Q5 proprietary metadata/licence migration is no longer listed as open in WORK.md: Apache-2.0 source, legal metadata, release and downloads are qualified by the 2026-11-14 "Remopy 2.0.2 Apache release qualified" and "Apache-2.0 source qualification" entries in this file (v2.0.2, source `00d200b8924e5663e513f6f545882ec9bb4ef27a`).

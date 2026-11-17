@@ -27,9 +27,24 @@ class NativeExecutionError(RuntimeError):
         super().__init__('FontLab execution failed: '+str(payload.get('error',payload)))
 
 
+def relay_python() -> str:
+    """Return the Python that runs the relay; refuse FontLab's own executable.
+
+    Inside FontLab, sys.executable is the application. Launching it with
+    Python arguments starts a second FontLab that holds the pipes open.
+    """
+    if not sys.executable:
+        raise RuntimeError('fontlab_remopy has no Python executable to run the relay with.')
+    if Path(sys.executable).name.lower().startswith('fontlab'):
+        raise RuntimeError(
+            'fontlab_remopy is an external client: sys.executable is FontLab itself '
+            f'({sys.executable}). Run it from a separate Python, not inside FontLab.')
+    return sys.executable
+
+
 def bridge_parameters(command: str) -> StdioServerParameters:
     """Use one SDK relay for all callers, including external coding agents."""
-    return StdioServerParameters(command=sys.executable,
+    return StdioServerParameters(command=relay_python(),
         args=['-m','fontlab_remopy.mcp.relay',command],env=os.environ.copy())
 
 
