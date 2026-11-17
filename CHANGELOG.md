@@ -2,6 +2,25 @@
 this_file: CHANGELOG.md
 ---
 
+## 2026-11-17 — Issue 256 Windows submission source checks
+
+- Add explicit CrossOver/Wine launch and script submission providers and CLI
+  backend selection; keep macOS defaults, root exports and authenticated MCP
+  execution intact. Return ScriptSubmission with execution_verified false.
+- Bind CrossOver to the validated absolute private bottle selector supported by
+  its installed launcher; derive single-separator C: executable paths from its
+  drive_c. Ordinary Wine uses an explicit WINEPREFIX and drive_c-only scripts.
+- Reject invalid files, launchers, bottle/backend combinations, nonfinite or
+  nonpositive timeouts and native filenames that change Windows path semantics.
+  Report subprocess timeouts as unknown outcomes without automatic replay.
+- Offline Python 3.11 arm64 checks: 235 tests pass on each locked, MCP 1.30.0
+  and MCP 1.26.0 SDK context; one existing deprecation warning each. Complete
+  changed modules have 94% CLI and 100% CrossOver/Wine combined coverage.
+  Scoped Ruff and genuine hatch-vcs wheel/sdist build pass.
+- Source candidate awaits independent review and ordinary delivery. No native
+  process, installation, commit, push or release ran. Windows receipts,
+  standalone Python/uv bootstrap, wheel installation and MCP remain unverified.
+
 ## 2.0.4 (2026-11-16)
 
 - `install.vfpy` is now the short fontlab-instamix stub. It installs

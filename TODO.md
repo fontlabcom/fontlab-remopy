@@ -2,6 +2,12 @@
 this_file: TODO.md
 ---
 
+## Issue 256 Windows submission — 2026-11-17
+
+- [ ] Obtain independent review and fresh-main delivery qualification for the CrossOver/Wine launch and submit candidate.
+- [ ] After native admission, verify actual CrossOver/Wine receipt-backed script execution without replaying unknown outcomes.
+- [ ] Qualify Windows standalone Python/uv bootstrap, owned wheel installation, embedded imports and native MCP discovery separately.
+
 ## Shared installer qualification — 2026-11-15
 
 - [ ] Deliver the source-reviewed, three-SDK-qualified shared-installer candidate through fresh-main reconciliation, independent merge review, normal hooks/combined-source gates, main delivery/exact-SHA CI and genuine tag/release/download qualification.

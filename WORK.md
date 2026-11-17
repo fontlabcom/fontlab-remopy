@@ -2,6 +2,25 @@
 this_file: WORK.md
 ---
 
+## 2026-11-17 — Issue 256 Windows submission source candidate
+
+Added explicit CrossOver and ordinary Wine launch/submit providers and CLI backend
+selection. Executables derive single-separator C: paths from the selected drive_c;
+Wine scripts remain drive_c-only. CrossOver uses an absolute validated private
+bottle selector, supported by the installed launcher's CXBottle::find_bottle,
+to avoid selecting a different configured BottlePath. Existing macOS/export/MCP
+contracts remain unchanged. TimeoutExpired reports unknown outcomes; no retry.
+
+Focused regressions initially failed for missing providers/CLI routes (39 failed,
+5 passed). The first implementation passed 67 boundary tests. Two additional
+red regressions exposed Windows drive/separator characters in native filenames;
+conversion now refuses those names before process execution. Final locked, MCP 1.30.0 and MCP 1.26.0 suites each pass 235 tests
+(19.56/18.06/17.18 seconds), with one existing deprecation warning. Complete
+changed-module combined coverage is CLI 94%, CrossOver 100%, Wine 100%. Scoped
+Ruff and the genuine hatch-vcs build pass. Independent review remains pending. No FontLab,
+Wine/CrossOver process, installation, commit, push or release ran. Native Windows
+and Windows uv/bootstrap qualification remain open above the source checks.
+
 ## 2026-11-15 — Shared installer source alignment
 
 Copied the reviewed shared installer exactly: dependency constraints and managed origins remain protected; inactive conditional dependencies are filtered before sibling execution in the resolver target Python. FontLab imports remain standard-library-only. Package identity, runtime APIs, dependency declarations, scripts, bundles and legal files are unchanged. The real source-archive check now includes the exact root installer; the prior omission was reproduced before the single allowlist addition.

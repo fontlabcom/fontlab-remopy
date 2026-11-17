@@ -2,6 +2,15 @@
 this_file: PLAN.md
 ---
 
+## Issue 256 Windows submission: remaining qualification — 2026-11-17
+
+Independently review the explicit CrossOver/Wine launch and submission candidate,
+reconcile with fresh main, run ordinary combined-source and hook gates, and verify
+remote delivery and exact-SHA CI. Admit real CrossOver/Windows receipt-backed
+execution only through the serialized native guard. Qualify Windows standalone
+Python/uv bootstrap, wheel installation, embedded imports and native MCP discovery
+separately; offline command construction and submission cannot establish them.
+
 ## Shared installer: remaining delivery qualification — 2026-11-15
 
 Reconcile the source-reviewed, three-SDK-qualified shared-installer candidate against fresh main, obtain independent merge review, run normal hook/combined-source gates, verify main delivery and exact-SHA CI, then qualify the tag/release/archive/download inputs. Preserve the existing package-specific dependency and distribution contracts. Then qualify the coherent provider/consumer and Script/Extension cohort through the admitted root installer and native lane; source checks do not establish those outcomes. Keep every existing ownership, native, publication and paused-work limit.

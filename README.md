@@ -53,6 +53,41 @@ with FontLab() as fl:
     print(metrics("A"))
 ```
 
+## CrossOver and Wine script submission
+
+`submit` requests a script open and prints its resolved `path` with
+`execution_verified: false`. It does not establish host readiness or completed
+execution. `execute` retains authenticated native MCP execution. A launch or
+submission timeout leaves the outcome unknown; inspect the host before repeating.
+No operation retries automatically.
+
+Choose the backend explicitly. CrossOver requires its existing standard macOS
+`~/Library/Application Support/CrossOver/Bottles/NAME` bottle, a native executable
+path inside that bottle's `drive_c`, and an executable CrossOver Wine launcher.
+The validated absolute bottle selector avoids configured bottle search paths.
+Scripts are existing native files and may be outside the bottle:
+
+```sh
+fontlab-remopy --timeout 10 submit ./probe.vfpy --backend crossover \
+  --bottle fontlab --wine /Applications/CrossOver.app/Contents/SharedSupport/CrossOver/bin/wine \
+  --executable "$HOME/Library/Application Support/CrossOver/Bottles/fontlab/drive_c/Program Files/Fontlab/FontLab 9/FontLab 9.exe"
+```
+
+For ordinary Wine, use `--backend wine --prefix /existing/prefix`, together with
+`--wine /path/to/wine` and `--executable /existing/prefix/drive_c/path/FontLab.exe`.
+Both executable and script must be inside that prefix's `drive_c`; no Z: mapping
+is assumed. `launch` takes the same backend options without a script path.
+Default macOS `launch` and `submit PATH` use the existing application provider.
+
+Python callers can import `launch` and `submit_script` explicitly from
+`fontlab_remopy.platforms.crossover` or `fontlab_remopy.platforms.wine`:
+`submit_script(path, executable, bottle="fontlab", wine=launcher, timeout=10)`;
+ordinary Wine uses `prefix=prefix_path` instead of `bottle`.
+Paths, executable launcher permissions and finite positive deadlines are checked
+before starting a process. These routes have offline command-construction tests;
+actual Windows execution, Windows uv/Python bootstrap, installation and MCP
+bridge availability still require separate native qualification.
+
 ## Documentation test environment
 
 Documentation checks use a separate Python 3.13 environment, matching
