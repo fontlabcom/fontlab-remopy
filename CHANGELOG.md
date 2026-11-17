@@ -2,6 +2,12 @@
 this_file: CHANGELOG.md
 ---
 
+## 2026-11-17 — Issue 258 task cleanup
+
+- Q5 proprietary metadata/licence migration is no longer listed as open in WORK.md: Apache-2.0 source, legal metadata, release and downloads are qualified by the 2026-11-14 "Remopy 2.0.2 Apache release qualified" and "Apache-2.0 source qualification" entries in this file (v2.0.2, source `00d200b8924e5663e513f6f545882ec9bb4ef27a`).
+- Merged the 2026-11-15 shared-installer TODO rows into the guarded common installer rows (same candidate; Instamix stub landed in the 2026-11-17 "Guarded common installer source qualification" entry) and the three overlapping native requalification rows into one row that names fl#8657 as the blocker.
+- Documentation only; no source or native change.
+
 ## 2026-11-17 — Guarded common installer source qualification
 
 The installer validates the requested FontLab data context before reusing an

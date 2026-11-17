@@ -23,7 +23,7 @@ execution only through the serialized native guard. Qualify Windows standalone
 Python/uv bootstrap, wheel installation, embedded imports and native MCP discovery
 separately; offline command construction and submission cannot establish them.
 
-## Shared installer: remaining delivery qualification — 2026-11-15
+## Shared installer: remaining delivery qualification — 2026-11-15 (same candidate as the guarded common installer above)
 
 Reconcile the source-reviewed, three-SDK-qualified shared-installer candidate against fresh main, obtain independent merge review, run normal hook/combined-source gates, verify main delivery and exact-SHA CI, then qualify the tag/release/archive/download inputs. Preserve the existing package-specific dependency and distribution contracts. Then qualify the coherent provider/consumer and Script/Extension cohort through the admitted root installer and native lane; source checks do not establish those outcomes. Keep every existing ownership, native, publication and paused-work limit.
 

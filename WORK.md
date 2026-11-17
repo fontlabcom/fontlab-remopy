@@ -139,8 +139,7 @@ complete previous WORK.md is archived byte-for-byte with its raw mode and hash
 in private task evidence; older archive references remain in those bytes.
 This progress update has not yet been independently reviewed or delivered.
 
-Remaining work is in PLAN/TODO. Keep the Q5 proprietary metadata/licence
-migration, provider checks, fresh artifacts/new release, root installer
+Remaining work is in PLAN/TODO. Provider checks, fresh artifacts/new release, root installer
 completion and installed/native acceptance open. All GUI entries and aliases,
 both themes, physical typing, filters, history/Undo/Redo, save/reopen and all
 17 Issue 252 native rows still need their evidence. Private Pages, Issue 123's
