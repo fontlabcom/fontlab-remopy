@@ -30,8 +30,8 @@ Keep runtime, ordinary installed artifacts, native workflows and published docum
 
 # FontLab Remopy
 
-`fontlab_remopy` controls FontLab remotely using native MCP and macOS application
-launch/file association. Python 3.11+ is required. Agent prompts, role selection
+`fontlab_remopy` controls FontLab remotely using native MCP and native macOS or
+Windows application launch/file submission. Python 3.11+ is required. Agent prompts, role selection
 and AI libraries belong to Aidus and are not dependencies here.
 
 ```python
@@ -53,13 +53,39 @@ with FontLab() as fl:
     print(metrics("A"))
 ```
 
+## Launch and MCP readiness
+
+```python
+from fontlab_remopy import ensure_ready, FontLab
+
+ensure_ready(timeout=30)
+with FontLab() as fl:
+    print(fl.eval('fontlab.__name__'))
+```
+
+`ensure_ready(app=..., command=..., timeout=30)` requests native macOS or Windows
+launch and waits for the authenticated tool catalogue before returning. Its
+single startup deadline covers launch, setup and catalogue discovery. A missing
+bridge fails before launch. An already reachable host needs no preference change.
+If MCP is unavailable, one nonce-confirmed `.vfpy` macro enables external MCP
+access and sets `generalHideWarningDialogs = True`; subsequent readiness checks
+retry only the read-only catalogue. User scripts and tool mutations are never
+replayed. The synchronous helper also works with an active notebook event loop.
+
+The setup macro changes these two FontLab preferences persistently. It runs only
+after FontLab can accept scripts: a modal startup dialog may still require manual
+dismissal before the first setup completes. A timeout retains the unique setup
+files and does not prove whether the macro executed; inspect the host and those
+files before trying again. It does not repair a missing or crashing native bridge.
+`launch()` and `submit_script()` alone remain request-only operations.
+
 ## CrossOver and Wine script submission
 
 `submit` requests a script open and prints its resolved `path` with
 `execution_verified: false`. It does not establish host readiness or completed
 execution. `execute` retains authenticated native MCP execution. A launch or
 submission timeout leaves the outcome unknown; inspect the host before repeating.
-No operation retries automatically.
+User operations do not retry automatically.
 
 Choose the backend explicitly. CrossOver requires its existing standard macOS
 `~/Library/Application Support/CrossOver/Bottles/NAME` bottle, a native executable
@@ -77,7 +103,9 @@ For ordinary Wine, use `--backend wine --prefix /existing/prefix`, together with
 `--wine /path/to/wine` and `--executable /existing/prefix/drive_c/path/FontLab.exe`.
 Both executable and script must be inside that prefix's `drive_c`; no Z: mapping
 is assumed. `launch` takes the same backend options without a script path.
-Default macOS `launch` and `submit PATH` use the existing application provider.
+Default `launch` and `submit PATH` use the native application provider on macOS
+or Windows. Windows defaults to `%ProgramFiles%\\Fontlab\\FontLab 9\\FontLab 9.exe`;
+Python callers may pass the full executable path as `app`.
 
 Python callers can import `launch` and `submit_script` explicitly from
 `fontlab_remopy.platforms.crossover` or `fontlab_remopy.platforms.wine`:
@@ -122,6 +150,7 @@ PythonQt environment; native checks use pythonqtside in FontLab.
 | `fl.fonts()`, `fl.output()`, named controls | Open fonts; recent captured output; the catalogue tools listed below |
 | `@fl.python` | Run a decorated function remotely with JSON arguments and result |
 | `enable_mcp()` | Inside FontLab: set `mcp.enabled` and notify the host (no `save()`) |
+| `ensure_ready(app=..., command=None, timeout=30)` | Synchronous native launch and bounded MCP readiness; one setup macro when unavailable |
 | `setup_mcp()`, `launch()`, `submit_script()`, `find_bridge()` | Launch FontLab, enable MCP from outside, locate the bridge |
 | `call_tool()`, `run_python()`, `execute_script()`, `probe_tools()` | One-shot async functions for single calls |
 

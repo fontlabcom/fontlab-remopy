@@ -5,6 +5,11 @@ from __future__ import annotations
 
 from typing import Any
 
+try:
+    from mcp.shared.exceptions import MCPError
+except ImportError:
+    from mcp.shared.exceptions import McpError as MCPError  # noqa: F401 - public SDK compatibility alias
+
 
 def field(model: Any, snake: str, camel: str) -> Any:
     """Read a protocol field: v2 models use snake_case, v1 models camelCase."""

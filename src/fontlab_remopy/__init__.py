@@ -5,7 +5,7 @@ from importlib import import_module
 from typing import Any
 
 _EXPORTS = {"launch":"platforms", "submit_script":"platforms", "ScriptSubmission":"platforms",
-            "find_bridge":"platforms", "enable_mcp":"host", "setup_mcp":"setup",
+            "find_bridge":"platforms", "enable_mcp":"host", "setup_mcp":"setup", "ensure_ready":"setup",
             "bridge_parameters":"mcp", "probe_tools":"mcp", "call_tool":"mcp",
             "run_python":"mcp", "execute_script":"mcp", "NativeExecutionError":"mcp",
             "FontLab":"client", "AsyncFontLab":"client", "ExecutionResult":"results",

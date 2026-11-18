@@ -2,6 +2,38 @@
 this_file: WORK.md
 ---
 
+## 2026-11-19 — Issue 274 startup readiness source candidate
+
+Added synchronous `ensure_ready(app, command, timeout)` for native macOS and
+Windows. It launches once, checks the authenticated catalogue, and submits one
+nonce-confirmed setup macro only when the bridge reports an unavailable host.
+The macro enables external MCP and persists `generalHideWarningDialogs = True`.
+Read-only catalogue probes share the full remaining startup deadline; user
+operations are never retried. A failed or unconfirmed setup retains its files.
+Windows paths remain individual process arguments; setup source is UTF-8.
+
+The controller's unchanged `quality.sh` gate passed all 260 tests with no skips
+and one existing deprecation warning in 36.11 seconds. All six complete changed
+production modules exceed the 80% gate: setup 96.36%, compatibility 95%, and the
+other four 100%. Controller SDK 1.30.0 and 1.26.0 suites each passed 260 tests
+with no skips and the same warning in 17.08 and 17.09 seconds. A task-owned App
+sibling link permits the existing AST-only consumer check without executing App.
+Unicode-path setup is covered under a simulated Windows cp1252 locale.
+
+Independent source review, installed-wheel fixture verification and the final
+AI-slop pass are clean. The installed fixture exercises actual SDK transport and
+all four consumer CLI remote routes without launching FontLab. Task-owned graph
+analysis completed; its untraced entry points, skipped callees, unresolved receiver
+sites and file cap remain explicit limits in the independent verification report.
+Ordinary main/artifact delivery and native acceptance remain separate. The
+previous WORK bytes were verified into the external task evidence archive before
+this entry was added.
+
+No native process, installer or preference was touched. The known build 9813
+bridge crash remains a native limit. A modal startup dialog can prevent the
+first macro from running; the API times out rather than replaying it. No native
+startup argument for suppressing such dialogs was found in the inspected source.
+
 ## 2026-11-18 — Issue 271 generated installer candidate
 
 Regenerated `install.vfpy` with Instamix 1.0.18, preserving project declarations and

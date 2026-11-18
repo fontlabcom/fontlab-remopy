@@ -7,6 +7,7 @@ import json
 import runpy
 import sys
 from contextlib import asynccontextmanager
+from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import AsyncMock, Mock
 
@@ -21,9 +22,15 @@ from fontlab_remopy.mcp import relay
 async def test_setup_when_submitted_then_proves_nonce_or_retains_failure_files(
     tmp_path, monkeypatch, failure
 ):
-    folder = tmp_path / "setup"
+    folder = tmp_path / "setup-é-字"
     folder.mkdir()
     monkeypatch.setattr(setup.tempfile, "mkdtemp", lambda **_: str(folder))
+    write_text = Path.write_text
+
+    def windows_write_text(path, data, encoding=None, **kwargs):
+        return write_text(path, data, encoding=encoding or "cp1252", **kwargs)
+
+    monkeypatch.setattr(Path, "write_text", windows_write_text)
     prefs, items = Mock(), Mock()
     monkeypatch.setitem(sys.modules, "fontlab", SimpleNamespace(
         flPreferences=lambda: prefs, flItems=items,
@@ -48,6 +55,7 @@ async def test_setup_when_submitted_then_proves_nonce_or_retains_failure_files(
         assert result.execution_verified and result.tools == []
         assert not folder.exists(), "Remove setup evidence only after confirmed success"
         prefs.load.assert_called_once_with({"mcp.enabled": True})
+        assert prefs.generalHideWarningDialogs is True
         items.notifyPreferencesChanged.assert_called_once_with()
         assert probe.call_args.args == ("bridge",)
         assert 0 < probe.call_args.kwargs["timeout"] <= 15

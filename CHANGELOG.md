@@ -2,6 +2,27 @@
 this_file: CHANGELOG.md
 ---
 
+## 2026-11-19 — Issue 274 startup readiness source checks
+
+- Added synchronous `ensure_ready` using the existing portal, nonce setup and
+  authenticated catalogue APIs. Launch/setup/discovery share one finite deadline;
+  only read-only readiness probes retry, and setup runs at most once.
+- Added native Windows launch/file submission and installed bridge discovery;
+  preserved argument boundaries and request-only submission results.
+- Setup enables MCP and persists warning-dialog suppression when needed. UTF-8
+  macro files support Windows usernames outside the system code page. Existing
+  reachable hosts avoid setup; permanent authentication/protocol errors propagate.
+- The unchanged controller quality gate passed 260 tests without skips in
+  36.11 seconds; all six changed modules have at least 95% coverage. SDK 1.30.0
+  and 1.26.0 suites each passed 260 tests without skips in 17.08/17.09 seconds.
+  Each run retains one existing deprecation warning. App's consumer check is
+  AST-only through a task-owned sibling link.
+- Independent source review, installed-wheel SDK fixture verification and the
+  AI-slop pass are clean. Task-owned graph analysis completed with its unresolved
+  receiver, untraced-entry and file-cap limits retained. Ordinary main/artifact
+  delivery, native launch, first-start dialogs, Windows execution and the build
+  9813 bridge crash remain separate acceptance checks.
+
 ## 2026-11-18 — Issue 271 installer source alignment
 
 The generated installer matches the reviewed Instamix 1.0.18 template: it requires

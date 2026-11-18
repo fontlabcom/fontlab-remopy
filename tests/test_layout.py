@@ -11,7 +11,7 @@ import pytest
 EXPORTS = {
     "launch": "platforms", "submit_script": "platforms",
     "ScriptSubmission": "platforms", "find_bridge": "platforms",
-    "enable_mcp": "host", "setup_mcp": "setup",
+    "enable_mcp": "host", "setup_mcp": "setup", "ensure_ready": "setup",
     "bridge_parameters": "mcp", "probe_tools": "mcp", "call_tool": "mcp",
     "run_python": "mcp", "execute_script": "mcp", "NativeExecutionError": "mcp",
     "FontLab": "client", "AsyncFontLab": "client",
@@ -103,7 +103,7 @@ def test_relay_when_no_arguments_then_preserves_index_error(module):
     assert result.stderr.rstrip().endswith("IndexError: list index out of range")
 
 
-@pytest.mark.parametrize("platform", ["linux", "win32"])
+@pytest.mark.parametrize("platform", ["linux"])
 def test_platform_when_unsupported_then_launch_errors_name_platform(platform):
     result = subprocess.run(
         [sys.executable, "-c", """

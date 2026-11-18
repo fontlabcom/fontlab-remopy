@@ -2,6 +2,12 @@
 this_file: TODO.md
 ---
 
+## Issue 274 startup readiness
+
+- [ ] Qualify ordinary main/artifact delivery of reviewed Remopy readiness and the fontlab PyPI consumer through the existing integration and release gates.
+- [ ] Verify macOS cold start and disabled-MCP bootstrap on a bridge-capable native build through the serialized runner; retain the build 9813 crash limit.
+- [ ] Verify native Windows launch, Unicode-path setup and delayed catalogue readiness on Windows; source mocks are separate evidence.
+
 - [ ] Issue 271: independently review and integrate the generated installer through repository gates, verify exact-SHA CI/archives, and qualify macOS/Windows native execution after serialized admission.
 
 

@@ -11,6 +11,8 @@ __all__ = ["DEFAULT_APP", "ScriptSubmission", "find_bridge", "launch", "submit_s
 
 if sys.platform == "darwin":
     from .macos import launch, submit_script
+elif sys.platform == "win32":
+    from .windows import launch, submit_script
 else:
     def launch(app: str | Path = DEFAULT_APP, timeout: float = 10) -> None:
         """Report unsupported native application launch on this platform."""
