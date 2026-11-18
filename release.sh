@@ -46,8 +46,15 @@ if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   exit 1
 fi
 
-echo "Pushing $TAG (pre-push hooks run now and may take a while)"
-git push --atomic origin HEAD "refs/tags/$TAG"
+BRANCH="$(git symbolic-ref --short HEAD)"
+remote_tag="$(git ls-remote origin "refs/tags/$TAG" | cut -f1)"
+remote_head="$(git ls-remote origin "refs/heads/$BRANCH" | cut -f1)"
+if [[ "$remote_tag" == "$(git rev-parse "refs/tags/$TAG")" && "$remote_head" == "$(git rev-parse HEAD)" ]]; then
+  echo "origin already has $BRANCH and $TAG; nothing to push"
+else
+  echo "Pushing $TAG (pre-push hooks run now and may take a while)"
+  git push --atomic origin "HEAD:refs/heads/$BRANCH" "refs/tags/$TAG"
+fi
 
 echo "Released $TAG"
 ./build.sh
