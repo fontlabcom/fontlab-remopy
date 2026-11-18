@@ -13,7 +13,7 @@ uv venv --python 3.11
 uv pip install --python .venv/bin/python .
 ```
 
-The runtime dependencies remain `mcp>=1.26,<3` and `anyio`. The library's application launch and file-association submission currently support macOS; MCP can use an explicitly configured executable on other supported SDK platforms. Discovery checks an explicit bridge argument or `FONTLAB_MCP_COMMAND`, then PATH or the FontLab 9 application bundle. The legacy `AIDUS_FONTLAB_MCP_COMMAND` remains accepted. A missing explicit executable never silently chooses a different FontLab build.
+The runtime dependencies remain `mcp>=1.26,<3` and `anyio`. Native application launch and file submission support macOS and Windows. On Windows the default application is `%ProgramFiles%\Fontlab\FontLab 9\FontLab 9.exe`; Python callers may pass a full executable path as `app`. Discovery checks an explicit bridge argument or `FONTLAB_MCP_COMMAND`, then PATH or the installed FontLab 9 application. The legacy `AIDUS_FONTLAB_MCP_COMMAND` remains accepted. A missing explicit executable never silently chooses a different FontLab build.
 
 For Glyphs 3/4, use the separate [standard-library script](api-and-glyphs-cli.md#remote-control-fontlab-from-glyphs): its Python needs no Remopy installation. Python 3.8+ is the stated minimum; retained runs used Python 3.9 and 3.13. Configure Glyphs' Python framework before using its Scripts menu.
 

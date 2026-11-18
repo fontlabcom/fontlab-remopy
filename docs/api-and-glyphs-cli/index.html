@@ -546,6 +546,10 @@
 <td>Inside FontLab: set <code>mcp.enabled</code> and notify the host (no <code>save()</code>)</td>
 </tr>
 <tr>
+<td><code>ensure_ready(app=..., command=None, timeout=30)</code></td>
+<td>Synchronous native launch and bounded MCP readiness; one setup macro when unavailable</td>
+</tr>
+<tr>
 <td><code>setup_mcp()</code>, <code>launch()</code>, <code>submit_script()</code>, <code>find_bridge()</code></td>
 <td>Launch FontLab, enable MCP from outside, locate the bridge</td>
 </tr>
@@ -613,16 +617,24 @@ NativeExecutionError with the original payload. <code>call_tool()</code> returns
 SDK result, including real errors. FontLab's fixed execution deadline remains
 unchanged. Timeouts leave a mutation's outcome unknown; operations are never
 automatically retried.</p>
-<p><code>launch()</code> requests application launch. <code>submit_script()</code> uses file association
-and returns execution_verified=False: submission alone cannot prove execution.
-The library's launch/file-association implementation currently supports macOS;
-MCP can use an explicitly configured executable on other supported SDK platforms.</p>
+<p><code>launch()</code> requests native macOS or Windows application launch.
+<code>submit_script()</code> requests a file open and returns execution_verified=False:
+submission alone cannot prove execution. Windows callers can select the full
+FontLab executable path with <code>app</code>; MCP uses the matching bridge executable.</p>
+<p><code>ensure_ready(app=..., command=None, timeout=30)</code> waits for the authenticated
+catalogue before returning. One finite startup deadline covers launch, setup and
+catalogue discovery. An unavailable host receives one nonce-confirmed setup macro;
+only read-only catalogue probes retry, and user operations are never replayed.
+An already reachable host needs no preference change. A modal startup dialog may
+prevent the first macro from executing and require manual dismissal; a missing
+or crashing bridge is not repaired by this helper.</p>
 <p><code>setup_mcp()</code> submits one unique .vfpy macro, verifies a nonce-matched native
 completion marker, then authenticates the bridge and discovers the tool catalogue.
-Only the extended mcp.enabled preference is set, using load() and a host
-notification. Failed/timeout setup retains local macro/status files for inspection.
-<code>enable_mcp()</code> performs the same preference update when called inside FontLab.
-It does not call save() or clear application logs.</p>
+Setup enables the extended mcp.enabled preference using load() and a host
+notification, and persists <code>generalHideWarningDialogs = True</code>. Failed/timeout
+setup retains local macro/status files for inspection; completion is unknown,
+so inspect the host before repeating. <code>enable_mcp()</code> updates only mcp.enabled
+when called inside FontLab. It does not call save() or clear application logs.</p>
 <p>Discovery checks an explicit argument or FONTLAB_MCP_COMMAND, then the native
 bridge on PATH or the FontLab 9 bundle. The legacy AIDUS_FONTLAB_MCP_COMMAND
 variable remains accepted for migration. Paths containing spaces are preserved.

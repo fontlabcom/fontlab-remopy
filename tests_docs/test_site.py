@@ -134,7 +134,8 @@ class SiteTests(unittest.TestCase):
         readme = (ROOT / 'README.md').read_text()
         table = readme.split('## API reference', 1)[1].split('Errors:', 1)[0]
         rows = [row.split('|')[1].strip().replace('`', '') for row in table.splitlines() if row.startswith('| ')][2:]
-        self.assertEqual(len(rows), 11)
+        self.assertEqual(len(rows), 12)
+        self.assertIn('ensure_ready(app=..., command=None, timeout=30)', rows)
         for row in rows:
             self.assertIn(row, text)
         for term in ('NativeExecutionError', 'ResultTransportError', 'FontLabClient', 'FontLabError', '32768', '65536', 'five-second', 'unknown', 'never triggers retry', 'Calls are serialized', 'async with', 'fontlab-remopy --timeout 15 setup'):

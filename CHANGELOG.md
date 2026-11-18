@@ -2,6 +2,17 @@
 this_file: CHANGELOG.md
 ---
 
+## 2026-11-19 — Issue 274 documentation API contract
+
+- Require exactly 12 API rows, explicitly including `ensure_ready`, while retaining
+  the checks for every rendered row and existing session/error/timeout terms.
+- Add the missing site API row and align the two affected pages with native
+  Windows launch, bounded readiness and actual setup preferences/limits.
+- Reproduce the missing rendered-row failure, then pass strict clean generation
+  and all 37 docs tests (7.125 seconds) using uv 0.13.7, Python 3.13.18 and the
+  exact hash-locked requirements. Runtime code and release tags are unchanged;
+  ordinary integration, remote CI and native outcomes remain separate.
+
 ## 2026-11-19 — Issue 274 startup readiness source checks
 
 - Added synchronous `ensure_ready` using the existing portal, nonce setup and

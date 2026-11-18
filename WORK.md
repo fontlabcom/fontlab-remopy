@@ -2,6 +2,24 @@
 this_file: WORK.md
 ---
 
+## 2026-11-19 — Issue 274 docs contract follow-up
+
+The main documentation check still required 11 API rows after README added
+`ensure_ready`; the actual site source also omitted that row. The check now
+requires exactly 12 rows and explicitly names `ensure_ready`, retaining every
+existing rendered-row and normative-session assertion. The API and installation
+pages describe native Windows support, bounded readiness, once-only setup,
+persistent warning suppression and startup-modal/bridge limits.
+
+The revised regression failed against the previous generated HTML, then passed
+after rebuilding. With uv 0.13.7, Python 3.13.18 and the exact hash-locked docs
+requirements, `sh src_docs/build.sh` passed strict clean generation and
+`python -m unittest discover -s tests_docs -v` passed all 37 tests in 7.125
+seconds. Generated changes are limited to the two corrected HTML pages and the
+search index. No runtime, dependency, release tag or native state changed.
+Ordinary docs integration and exact-SHA CI remain controller-owned. The previous
+WORK bytes were archived and verified before this entry was added.
+
 ## 2026-11-19 — Issue 274 startup readiness source candidate
 
 Added synchronous `ensure_ready(app, command, timeout)` for native macOS and
