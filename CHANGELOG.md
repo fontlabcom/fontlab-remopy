@@ -2,6 +2,27 @@
 this_file: CHANGELOG.md
 ---
 
+## 2026-11-19 — Issue 274 provider/consumer publication verified
+
+- Published [Remopy 2.0.12](https://github.com/fontlabcom/fontlab-remopy/releases/tag/v2.0.12)
+  to GitHub and PyPI from runtime source `2ed7cd298b488c013a27c3761d9550c795379dfd`;
+  release run 44418837873 succeeded. The paired Fontlab/fontlab-pypi packages
+  fontlab, fontgate and fontpr 1.0.2 published from
+  `3cb604419516ab068a92ebbf938a614e43f126b3`; release run 44419239311 and all
+  six consumer OS/Python CI combinations passed.
+- Corrected the initial 11-versus-12 API-row documentation failure in docs-only
+  successor `18008026b4d34f2a2815bb097567eb7b017a1420`. Its ordinary hook passed
+  260 tests (28.93 seconds); controller strict generation and 37 docs tests passed
+  (7.034 seconds). Exact-successor docs run 44419786100 succeeded and its remote
+  main identity was verified. The v2.0.12 runtime tag is unchanged.
+- Independently verified ordinary clean PyPI resolver closure selecting Remopy
+  2.0.12, all eight published wheel/sdist hashes across PyPI and GitHub, installed
+  byte identity and the four released CLI routes through actual SDK transport.
+  Exactly one setup submission occurred and no user operation was replayed.
+- Native/owner installation was not performed. The build 9813 bridge crash and
+  unavailable prescribed native runner prevent native admission; macOS cold
+  start/modal behavior and native Windows execution remain open.
+
 ## 2026-11-19 — Issue 274 documentation API contract
 
 - Require exactly 12 API rows, explicitly including `ensure_ready`, while retaining

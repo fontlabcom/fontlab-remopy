@@ -2,6 +2,41 @@
 this_file: WORK.md
 ---
 
+## 2026-11-19 — Issue 274 published provider/consumer delivery
+
+Remopy 2.0.12 was published to GitHub and PyPI from runtime source
+`2ed7cd298b488c013a27c3761d9550c795379dfd` through successful release run
+[44418837873](https://github.com/fontlabcom/fontlab-remopy/actions/runs/44418837873).
+The consumer's `fontlab`, `fontgate` and `fontpr` 1.0.2 packages were published
+from `3cb604419516ab068a92ebbf938a614e43f126b3` through successful release run
+[44419239311](https://github.com/Fontlab/fontlab-pypi/actions/runs/44419239311);
+all six consumer OS/Python CI combinations passed.
+
+The initial Remopy documentation run failed because the API contract expected
+11 rows after README added the twelfth row. Docs-only successor
+`18008026b4d34f2a2815bb097567eb7b017a1420` corrected the contract and site source,
+passed the unchanged ordinary hook (260 tests, 28.93 seconds), and became the
+verified remote main. Controller strict generation and all 37 docs tests passed
+in 7.034 seconds. Exact-successor documentation run
+[44419786100](https://github.com/fontlabcom/fontlab-remopy/actions/runs/44419786100)
+succeeded. The runtime release source and v2.0.12 tag remain unchanged; this
+successful docs run qualifies the successor, not the original runtime commit.
+
+Independent released-artifact verification installed all three consumer packages
+from PyPI through ordinary dependency resolution and selected Remopy 2.0.12.
+`uv pip check` passed; all eight downloaded wheel/sdist SHA-256 values agree
+across PyPI and GitHub, and installed production bytes match the released wheels.
+The released SDK fixture passes tools/eval/run/call with exactly one confirmed
+setup submission and no user-operation replay. This supersedes the candidate
+wheel dependency-floor limitation; the detailed release verification remains in
+external task evidence.
+
+Native acceptance remains open. The installed /Applications build 9813 has the
+known bridge crash, and the prescribed serialized native runner is unavailable,
+so no native admission or owner installation occurred. Real macOS cold start,
+startup-modal behavior and native Windows execution remain unverified. The
+previous WORK bytes were archived and verified before this entry was added.
+
 ## 2026-11-19 — Issue 274 docs contract follow-up
 
 The main documentation check still required 11 API rows after README added

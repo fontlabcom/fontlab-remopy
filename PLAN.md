@@ -4,11 +4,13 @@ this_file: PLAN.md
 
 ## Issue 274 startup readiness: remaining acceptance
 
-Reconcile the reviewed, controller-verified provider/consumer source with fresh
-main and deliver through the ordinary hooks, exact-SHA and release/artifact checks. Qualify real macOS cold-start/disabled-MCP readiness on a bridge-capable
-build and native Windows launch/submission separately. A startup modal that blocks
+Qualify real macOS cold-start/disabled-MCP readiness on a bridge-capable build
+through the prescribed serialized native runner, and qualify native Windows
+launch/submission separately. The installed build 9813 bridge crash and missing
+prescribed runner currently prevent native admission. A startup modal that blocks
 file submission needs manual dismissal; the once-only setup macro cannot suppress
-it before executing. Keep the known 9813 bridge crash and existing native holds.
+it before executing. Keep existing native holds. Published provider/consumer,
+ordinary resolver and docs-successor checks are recorded in CHANGELOG.
 
 ## Issue 271 installer qualification
 
