@@ -20,7 +20,17 @@ with one existing deprecation warning each. The three removed parameter cases
 covered the deleted conditional initial-probe branch. Tests assert setup before
 any probe and require the actual macro's marker before catalogue discovery.
 Scoped Ruff, strict locked docs generation and all 37 docs tests (8.996 seconds)
-pass. Commit/publication remain controller-owned for the next 2.0.13 patch.
+pass. Remopy 2.0.13 was published to GitHub and PyPI from
+`b58645763e7d24b0e20a7f5e1bf7c8410e760b73` through successful release run
+44429937102; exact-source documentation run 44429882914 passed. The generated
+sitemap-only successor `606aecf` was fast-forwarded without changing runtime
+source. The consumer's fontlab, fontgate and fontpr 1.0.3 packages were published
+from `241fa3d3220bd0c459e06f616ef307a08175333b` through successful run 44430211255.
+
+The actual CLI path confirms nonce-matched native setup completion before
+catalogue discovery timed out. Its generated macro sets the preference True;
+the separate direct native receipt above includes True readback. This proves
+script-first ordering and preference setup, not a successful native tools response.
 
 ## 2026-11-19 — Issue 274 published provider/consumer delivery
 

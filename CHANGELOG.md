@@ -2,7 +2,7 @@
 this_file: CHANGELOG.md
 ---
 
-## Unreleased — Public script-first MCP setup
+## 2.0.13 — Public script-first MCP setup
 
 - Open FontLab with the public `setup_mcp()` `.vfpy` before any MCP probe:
   enable MCP and set `generalHideWarningDialogs = True`. `ensure_ready()` and
@@ -11,7 +11,15 @@ this_file: CHANGELOG.md
 - The controller's once-only native macro has nonce-matched success and True
   preference readback. All three SDK suites pass 257 tests; strict docs generation
   and 37 docs tests pass. A separate native bridge eval failure does not negate
-  the verified preference script.
+  the verified preference script. The actual CLI path confirms nonce-matched
+  native setup completion before a separate catalogue timeout; True preference
+  readback comes from the direct macro receipt. No successful native tools
+  response is claimed.
+- Published Remopy 2.0.13 to GitHub and PyPI from
+  `b58645763e7d24b0e20a7f5e1bf7c8410e760b73`; release run 44429937102 and
+  exact-source docs run 44429882914 passed. The paired fontlab, fontgate and
+  fontpr 1.0.3 release from `241fa3d3220bd0c459e06f616ef307a08175333b` passed
+  publication run 44430211255.
 
 ## 2026-11-19 — Issue 274 provider/consumer publication verified
 
