@@ -41,7 +41,12 @@ async def test_setup_when_submitted_then_proves_nonce_or_retains_failure_files(
             raise RuntimeError("submission failed")
         runpy.run_path(str(path))
 
-    probe = AsyncMock(return_value=[])
+    async def catalogue(*args, **kwargs):
+        assert (folder / "result.json").is_file(), "Submit and confirm the .vfpy before any MCP probe"
+        assert prefs.generalHideWarningDialogs is True
+        return []
+
+    probe = AsyncMock(side_effect=catalogue)
     monkeypatch.setattr(setup, "submit_script", submit)
     monkeypatch.setattr(setup, "probe_tools", probe)
     if failure:

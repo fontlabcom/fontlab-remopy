@@ -622,10 +622,11 @@ automatically retried.</p>
 submission alone cannot prove execution. Windows callers can select the full
 FontLab executable path with <code>app</code>; MCP uses the matching bridge executable.</p>
 <p><code>ensure_ready(app=..., command=None, timeout=30)</code> waits for the authenticated
-catalogue before returning. One finite startup deadline covers launch, setup and
-catalogue discovery. An unavailable host receives one nonce-confirmed setup macro;
+catalogue before returning. One finite startup deadline covers file submission,
+setup and catalogue discovery. FontLab opens with one nonce-confirmed setup macro
+before any MCP probe, including when FontLab is already running;
 only read-only catalogue probes retry, and user operations are never replayed.
-An already reachable host needs no preference change. A modal startup dialog may
+A modal startup dialog may
 prevent the first macro from executing and require manual dismissal; a missing
 or crashing bridge is not repaired by this helper.</p>
 <p><code>setup_mcp()</code> submits one unique .vfpy macro, verifies a nonce-matched native
@@ -635,6 +636,15 @@ notification, and persists <code>generalHideWarningDialogs = True</code>. Failed
 setup retains local macro/status files for inspection; completion is unknown,
 so inspect the host before repeating. <code>enable_mcp()</code> updates only mcp.enabled
 when called inside FontLab. It does not call save() or clear application logs.</p>
+<p>The setup operation is exported for direct use. Its <code>.vfpy</code> file-open request
+also launches FontLab when needed:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fontlab_remopy</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_mcp</span>
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">setup_mcp</span><span class="p">())</span>
+</code></pre></div>
+<p>The external <code>fontlab-cli</code> uses <code>ensure_ready()</code> automatically before its
+<code>tools</code>, <code>eval</code>, <code>run</code> and <code>call</code> operations.</p>
 <p>Discovery checks an explicit argument or FONTLAB_MCP_COMMAND, then the native
 bridge on PATH or the FontLab 9 bundle. The legacy AIDUS_FONTLAB_MCP_COMMAND
 variable remains accepted for migration. Paths containing spaces are preserved.

@@ -91,10 +91,11 @@ submission alone cannot prove execution. Windows callers can select the full
 FontLab executable path with `app`; MCP uses the matching bridge executable.
 
 `ensure_ready(app=..., command=None, timeout=30)` waits for the authenticated
-catalogue before returning. One finite startup deadline covers launch, setup and
-catalogue discovery. An unavailable host receives one nonce-confirmed setup macro;
+catalogue before returning. One finite startup deadline covers file submission,
+setup and catalogue discovery. FontLab opens with one nonce-confirmed setup macro
+before any MCP probe, including when FontLab is already running;
 only read-only catalogue probes retry, and user operations are never replayed.
-An already reachable host needs no preference change. A modal startup dialog may
+A modal startup dialog may
 prevent the first macro from executing and require manual dismissal; a missing
 or crashing bridge is not repaired by this helper.
 
@@ -105,6 +106,19 @@ notification, and persists `generalHideWarningDialogs = True`. Failed/timeout
 setup retains local macro/status files for inspection; completion is unknown,
 so inspect the host before repeating. `enable_mcp()` updates only mcp.enabled
 when called inside FontLab. It does not call save() or clear application logs.
+
+The setup operation is exported for direct use. Its `.vfpy` file-open request
+also launches FontLab when needed:
+
+```python
+import asyncio
+from fontlab_remopy import setup_mcp
+
+asyncio.run(setup_mcp())
+```
+
+The external `fontlab-cli` uses `ensure_ready()` automatically before its
+`tools`, `eval`, `run` and `call` operations.
 
 Discovery checks an explicit argument or FONTLAB_MCP_COMMAND, then the native
 bridge on PATH or the FontLab 9 bundle. The legacy AIDUS_FONTLAB_MCP_COMMAND

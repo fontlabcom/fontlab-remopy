@@ -4,13 +4,13 @@ this_file: PLAN.md
 
 ## Issue 274 startup readiness: remaining acceptance
 
-Qualify real macOS cold-start/disabled-MCP readiness on a bridge-capable build
-through the prescribed serialized native runner, and qualify native Windows
-launch/submission separately. The installed build 9813 bridge crash and missing
-prescribed runner currently prevent native admission. A startup modal that blocks
-file submission needs manual dismissal; the once-only setup macro cannot suppress
-it before executing. Keep existing native holds. Published provider/consumer,
-ordinary resolver and docs-successor checks are recorded in CHANGELOG.
+Direct macOS `.vfpy` submission has nonce-confirmed native proof: the script
+enables MCP and reads back `generalHideWarningDialogs = True`. The public setup
+operation and its fontlab-cli integration do not depend on a preliminary MCP
+probe. Real cold start, native Windows execution and subsequent catalogue/timeout
+behavior remain separate follow-ups, not gates for the requested setup API.
+Published provider/consumer, ordinary resolver and docs-successor checks are
+recorded in CHANGELOG.
 
 ## Issue 271 installer qualification
 

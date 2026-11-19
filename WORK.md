@@ -2,6 +2,26 @@
 this_file: WORK.md
 ---
 
+## 2026-11-19 — Public script-first MCP setup
+
+`ensure_ready()` now validates the selected bridge and directly calls the public
+`setup_mcp()` operation. Its `.vfpy` file opens FontLab, enables MCP and hides
+warning dialogs before any MCP probe. The separate launch/initial-probe branch
+is removed. Existing fontlab-cli tools/eval/run/call hooks use this path; user
+operations are not replayed. README/site show explicit public setup usage.
+
+The controller submitted the True-preference macro once through existing Remopy
+file submission; its nonce-matched native marker confirms success and
+`generalHideWarningDialogs = True`. This proves the preference script itself;
+the independently failing native bridge eval is a separate connection outcome.
+
+All three SDK suites pass 257 tests without skips (20.29/17.60/17.59 seconds),
+with one existing deprecation warning each. The three removed parameter cases
+covered the deleted conditional initial-probe branch. Tests assert setup before
+any probe and require the actual macro's marker before catalogue discovery.
+Scoped Ruff, strict locked docs generation and all 37 docs tests (8.996 seconds)
+pass. Commit/publication remain controller-owned for the next 2.0.13 patch.
+
 ## 2026-11-19 — Issue 274 published provider/consumer delivery
 
 Remopy 2.0.12 was published to GitHub and PyPI from runtime source

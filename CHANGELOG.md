@@ -2,6 +2,17 @@
 this_file: CHANGELOG.md
 ---
 
+## Unreleased — Public script-first MCP setup
+
+- Open FontLab with the public `setup_mcp()` `.vfpy` before any MCP probe:
+  enable MCP and set `generalHideWarningDialogs = True`. `ensure_ready()` and
+  the fontlab-cli remote routes use this operation directly; remove the redundant
+  separate launch/initial-probe branch. Document explicit public setup usage.
+- The controller's once-only native macro has nonce-matched success and True
+  preference readback. All three SDK suites pass 257 tests; strict docs generation
+  and 37 docs tests pass. A separate native bridge eval failure does not negate
+  the verified preference script.
+
 ## 2026-11-19 — Issue 274 provider/consumer publication verified
 
 - Published [Remopy 2.0.12](https://github.com/fontlabcom/fontlab-remopy/releases/tag/v2.0.12)

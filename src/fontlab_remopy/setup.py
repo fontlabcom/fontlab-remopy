@@ -20,7 +20,7 @@ from mcp.types import Tool
 
 from .mcp import probe_tools
 from .mcp.compat import MCPError
-from .platforms import DEFAULT_APP, find_bridge, launch, submit_script
+from .platforms import DEFAULT_APP, find_bridge, submit_script
 
 
 @dataclass(frozen=True)
@@ -84,29 +84,15 @@ async def _ensure_ready(app: str | Path, command: str | None, timeout: float) ->
     bridge = find_bridge(command if command is not None else (candidate if candidate.is_file() else None))
     if bridge is None:
         raise FileNotFoundError('No executable FontLab MCP bridge found')
-    deadline = time.monotonic() + timeout
-    async with asyncio.timeout(timeout):
-        await asyncio.to_thread(launch, app, timeout)
-        remaining = deadline - time.monotonic()
-        if remaining <= 0:
-            raise TimeoutError('FontLab launch exceeded the startup deadline')
-        try:
-            return SetupResult(await probe_tools(bridge, timeout=remaining))
-        except Exception as error:
-            if not _unavailable(error):
-                raise
-        remaining = deadline-time.monotonic()
-        if remaining <= 0:
-            raise TimeoutError('FontLab MCP did not become ready before the startup deadline')
-        return await setup_mcp(app, bridge, timeout=remaining)
+    return await setup_mcp(app, bridge, timeout=timeout)
 
 
 def ensure_ready(app: str | Path = DEFAULT_APP, command: str | None = None,
                  timeout: float = 30) -> SetupResult:
     """Launch and prove MCP readiness before executing any user operation.
 
-    An unavailable host receives one nonce-confirmed setup macro, enabling MCP
-    and suppressing warning dialogs. Only read-only catalogue probes are retried.
+    FontLab opens with one nonce-confirmed setup macro, enabling MCP and hiding
+    warning dialogs before discovery. Only read-only catalogue probes retry.
     The startup deadline includes launch, setup and authentication. Failed setup
     retains its files and must not be automatically replayed.
     """

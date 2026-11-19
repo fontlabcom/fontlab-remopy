@@ -23,62 +23,48 @@ def offline(message='Cannot connect to FontLab 9. Start FontLab'):
 
 @pytest.fixture
 def ready_host(monkeypatch, tmp_path):
-    launch = Mock()
-    monkeypatch.setattr(setup, 'launch', launch)
     monkeypatch.setattr(setup, 'find_bridge', Mock(return_value='selected bridge'))
-    monkeypatch.setattr(setup, 'probe_tools', AsyncMock(return_value=['tool']))
+    monkeypatch.setattr(setup, 'probe_tools', AsyncMock())
     monkeypatch.setattr(setup, 'setup_mcp', AsyncMock(return_value=setup.SetupResult(['tool'])))
-    return tmp_path / 'FontLab 9.app', launch
+    return tmp_path / 'FontLab 9.app'
 
 
 @pytest.mark.asyncio
-async def test_ready_host_when_called_from_running_loop_then_sync_api_uses_portal(ready_host):
-    app, launch = ready_host
+async def test_startup_when_called_from_running_loop_then_sync_api_sets_up_before_probe(ready_host):
+    app = ready_host
     assert setup.ensure_ready(app, 'bridge', timeout=1).tools == ['tool']
-    launch.assert_called_once_with(app, 1)
-    setup.setup_mcp.assert_not_awaited()
+    setup.setup_mcp.assert_awaited_once_with(app, 'selected bridge', timeout=1)
+    setup.probe_tools.assert_not_awaited()
     setup.find_bridge.assert_called_once_with('bridge')
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize('error', [offline(), TimeoutError(), ExceptionGroup('SDK transport', [offline()])])
-async def test_startup_when_host_unavailable_then_bootstraps_exactly_once(ready_host, error):
-    app, _ = ready_host
-    setup.probe_tools.side_effect = error
-    assert (await setup._ensure_ready(app, 'bridge', 1)).tools == ['tool']
-    setup.probe_tools.assert_awaited_once()
-    setup.setup_mcp.assert_awaited_once()
-    assert 0 < setup.setup_mcp.call_args.kwargs['timeout'] <= 1
-
-
-@pytest.mark.asyncio
 @pytest.mark.parametrize('error', [PermissionError('refused'), offline('FontLab MCP authentication failed.'), ValueError('schema')])
-async def test_startup_when_permanent_failure_then_preserves_error_without_setup(ready_host, error):
-    app, _ = ready_host
-    setup.probe_tools.side_effect = error
+async def test_startup_when_setup_fails_then_preserves_error_without_replay(ready_host, error):
+    setup.setup_mcp.side_effect = error
     with pytest.raises(type(error)) as caught:
-        await setup._ensure_ready(app, 'bridge', 1)
+        await setup._ensure_ready(ready_host, 'bridge', 1)
     assert caught.value is error
-    setup.setup_mcp.assert_not_awaited()
+    setup.setup_mcp.assert_awaited_once()
+    setup.probe_tools.assert_not_awaited()
 
 
 @pytest.mark.asyncio
-async def test_startup_when_bridge_missing_then_refuses_before_launch(ready_host):
-    app, launch = ready_host
+async def test_startup_when_bridge_missing_then_refuses_before_submission(ready_host):
     setup.find_bridge.return_value = None
     with pytest.raises(FileNotFoundError, match='bridge'):
-        await setup._ensure_ready(app, None, 1)
-    launch.assert_not_called()
+        await setup._ensure_ready(ready_host, None, 1)
+    setup.setup_mcp.assert_not_awaited()
+    setup.probe_tools.assert_not_awaited()
 
 
 @pytest.mark.asyncio
 async def test_startup_when_selected_bundle_has_bridge_then_uses_it(ready_host, monkeypatch):
-    app, _ = ready_host
     monkeypatch.setattr(setup.sys, 'platform', 'darwin')
-    candidate = app / 'Contents/MacOS/fontlab-mcp'
+    candidate = ready_host / 'Contents/MacOS/fontlab-mcp'
     candidate.parent.mkdir(parents=True)
     candidate.touch()
-    await setup._ensure_ready(app, None, 1)
+    await setup._ensure_ready(ready_host, None, 1)
     setup.find_bridge.assert_called_once_with(candidate)
 
 
@@ -91,11 +77,10 @@ async def test_catalogue_when_full_deadline_available_then_does_not_cap_slow_val
 
 
 @pytest.mark.parametrize('timeout', [0, -1, float('nan'), float('inf')])
-def test_startup_when_invalid_deadline_then_refuses_before_launch(ready_host, timeout):
-    _, launch = ready_host
+def test_startup_when_invalid_deadline_then_refuses_before_submission(ready_host, timeout):
     with pytest.raises(ValueError, match='positive and finite'):
         setup.ensure_ready(timeout=timeout)
-    launch.assert_not_called()
+    setup.setup_mcp.assert_not_awaited()
 
 
 @pytest.mark.asyncio

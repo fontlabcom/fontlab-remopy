@@ -65,10 +65,10 @@ with FontLab() as fl:
 
 `ensure_ready(app=..., command=..., timeout=30)` requests native macOS or Windows
 launch and waits for the authenticated tool catalogue before returning. Its
-single startup deadline covers launch, setup and catalogue discovery. A missing
-bridge fails before launch. An already reachable host needs no preference change.
-If MCP is unavailable, one nonce-confirmed `.vfpy` macro enables external MCP
-access and sets `generalHideWarningDialogs = True`; subsequent readiness checks
+single startup deadline covers file submission, setup and catalogue discovery.
+A missing bridge fails before submission. FontLab opens with one nonce-confirmed
+`.vfpy` macro that enables external MCP and sets `generalHideWarningDialogs = True`
+before any MCP probe, including when FontLab is already running. Readiness checks
 retry only the read-only catalogue. User scripts and tool mutations are never
 replayed. The synchronous helper also works with an active notebook event loop.
 
@@ -78,6 +78,18 @@ dismissal before the first setup completes. A timeout retains the unique setup
 files and does not prove whether the macro executed; inspect the host and those
 files before trying again. It does not repair a missing or crashing native bridge.
 `launch()` and `submit_script()` alone remain request-only operations.
+
+For explicit setup, the exported `setup_mcp()` operation opens FontLab with its
+setup `.vfpy`, enables MCP and turns on Hide warning dialogs:
+
+```python
+import asyncio
+from fontlab_remopy import setup_mcp
+
+asyncio.run(setup_mcp())
+```
+
+`fontlab-cli tools`, `eval`, `run` and `call` use `ensure_ready()` automatically.
 
 ## CrossOver and Wine script submission
 
